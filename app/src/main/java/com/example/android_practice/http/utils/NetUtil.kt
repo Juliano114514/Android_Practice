@@ -2,17 +2,21 @@ package com.example.android_practice.http.utils
 
 import android.os.Handler
 import android.os.Looper
+import com.example.android_practice.http.api.WeatherApi
 import com.example.android_practice.http.data.WeatherData
 import com.google.gson.Gson
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.lang.Exception
 
 object NetUtil {
-  const val BASE_URL = "http://v1.yiketianqi.com/free/day"
+  const val OKHTTP_URL = "http://v1.yiketianqi.com/free/day"
+  const val BASE_URL = "http://v1.yiketianqi.com/"
   const val APP_ID = "97413444"
   const val APP_SECRET = "v9TSIPws"
 
@@ -20,9 +24,17 @@ object NetUtil {
   private val client = OkHttpClient()
   private val mainHandler = Handler(Looper.getMainLooper())
 
+  // retrofit 相关
+  private val retrofit = Retrofit.Builder()
+    .baseUrl(BASE_URL)
+    .addConverterFactory(GsonConverterFactory.create())
+    .build()
+  private val weatherApi: WeatherApi = retrofit.create(WeatherApi::class.java)
+
+
   fun getWeatherOkhttp(city: String, callback: (WeatherData?) -> Unit){
     // 构建URL
-    val url = BASE_URL.toHttpUrlOrNull()?.newBuilder()
+    val url = OKHTTP_URL.toHttpUrlOrNull()?.newBuilder()
       ?.addQueryParameter("appid", APP_ID)
       ?.addQueryParameter("appsecret", APP_SECRET)
       ?.addQueryParameter("city", city)
@@ -67,7 +79,42 @@ object NetUtil {
     })
   }
 
+  fun getWeatherRetrofit(city: String, callback: (WeatherData?) -> Unit) {
+    val call = weatherApi.getWeather(
+      appid = APP_ID,
+      appsecret = APP_SECRET,
+      city = city,
+      unescape = "1"
+    )
 
+    call.enqueue(object : retrofit2.Callback<WeatherData> {
+      override fun onResponse(
+        call: retrofit2.Call<WeatherData>,
+        response: retrofit2.Response<WeatherData>
+      ) {
+        if (response.isSuccessful) {
+          val weatherData = response.body()
+          mainHandler.post {
+            callback(weatherData)
+          }
+        } else {
+          mainHandler.post {
+            callback(null)
+          }
+        }
+      }
+
+      override fun onFailure(
+        call: retrofit2.Call<WeatherData>,
+        t: Throwable
+      ) {
+        t.printStackTrace()
+        mainHandler.post {
+          callback(null)
+        }
+      }
+    })
+  }
 
   fun decodeJson(json: String): WeatherData? {
     return try{
