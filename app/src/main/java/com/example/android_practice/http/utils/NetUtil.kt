@@ -5,11 +5,15 @@ import android.os.Looper
 import com.example.android_practice.http.api.WeatherApi
 import com.example.android_practice.http.data.WeatherData
 import com.google.gson.Gson
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.lang.Exception
@@ -28,9 +32,9 @@ object NetUtil {
   private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .addConverterFactory(GsonConverterFactory.create())
+    .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // 新增Rxjava支持
     .build()
   private val weatherApi: WeatherApi = retrofit.create(WeatherApi::class.java)
-
 
   fun getWeatherOkhttp(city: String, callback: (WeatherData?) -> Unit){
     // 构建URL
@@ -114,6 +118,27 @@ object NetUtil {
         }
       }
     })
+  }
+
+  fun getWeatherObservable(city: String, callback: (WeatherData?) -> Unit): Disposable{
+    return weatherApi.getWeatherObservable(
+      appid = APP_ID,
+      appsecret = APP_SECRET,
+      city = city,
+      unescape = "1"
+    ).subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread()) // 主线程中处理结果（涉及到UI更新）
+      .subscribe(
+        { weatherData ->
+          // onNext: 请求成功，返回数据
+          callback(weatherData)
+        },
+        { throwable ->
+          // onError: 请求失败，打印错误并回调 null
+          throwable.printStackTrace()
+          callback(null)
+        }
+      )
   }
 
   fun decodeJson(json: String): WeatherData? {

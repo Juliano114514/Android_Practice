@@ -25,6 +25,14 @@
     android:text="发送retrofit请求"
     android:textSize="20sp"/>
 
+  <Button
+    android:id="@+id/http_observable"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginHorizontal="20dp"
+    android:text="发送observable请求"
+    android:textSize="20sp"/>
+
   <EditText
     android:id="@+id/http_input"
     android:layout_width="match_parent"
