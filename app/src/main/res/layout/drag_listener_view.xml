@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <com.example.android_practice.listener.dragListener.DragHelperView
+    android:id="@+id/drag_helper"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
+
+    <View
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="#F44336" />
+
+    <View
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="#E91E63" />
+
+    <View
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="#9C27B0" />
+
+    <View
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="#673AB7" />
+
+    <View
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="#3F51B5" />
+
+  </com.example.android_practice.listener.dragListener.DragHelperView>
+
+
+  <com.example.android_practice.listener.dragListener.DragListenerView
+    android:id="@+id/drag_listener"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
+
+
+    <View
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="#F44336" />
+
+    <View
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="#E91E63" />
+
+    <View
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="#9C27B0" />
+
+    <View
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="#673AB7" />
+
+    <View
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="#3F51B5" />
+
+  </com.example.android_practice.listener.dragListener.DragListenerView>
+</LinearLayout>
+

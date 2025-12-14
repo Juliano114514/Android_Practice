@@ -29,7 +29,12 @@
       <activity
         android:name="com.example.android_practice.http.HttpActivity"
         android:theme="@style/Theme.Android_Practice">
+      </activity>
 
+
+      <activity
+        android:name="com.example.android_practice.listener.ListenerActivity"
+        android:theme="@style/Theme.Android_Practice">
       </activity>
 
 

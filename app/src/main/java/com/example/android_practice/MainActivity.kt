@@ -4,21 +4,31 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android_practice.databinding.MainLayoutBinding
 import com.example.android_practice.http.HttpActivity
+import com.example.android_practice.listener.ListenerActivity
 
 class MainActivity : AppCompatActivity() {
 
-  private val httpBtn: Button by lazy { findViewById(R.id.main_http) }
+  private lateinit var binding: MainLayoutBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.main_layout)
+    binding = MainLayoutBinding.inflate(layoutInflater)
+    setContentView(binding.root)
 
     initListener()
   }
 
   private fun initListener(){
-    httpBtn.setOnClickListener { startActivity(Intent(this, HttpActivity::class.java )) }
+    binding.mainHttp.setOnClickListener {
+      startActivity(Intent(this, HttpActivity::class.java ))
+    }
+
+    binding.dragView.setOnClickListener {
+      startActivity(Intent(this, ListenerActivity::class.java))
+    }
   }
+
 
 }

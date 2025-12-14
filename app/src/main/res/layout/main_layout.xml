@@ -15,11 +15,11 @@
     android:textSize="20sp"/>
 
   <Button
-    android:id="@+id/paging3"
+    android:id="@+id/drag_view"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:layout_marginHorizontal="20dp"
-    android:text="paging3相关内容"
+    android:text="dragView 相关内容"
     android:textSize="20sp"/>
 
 
