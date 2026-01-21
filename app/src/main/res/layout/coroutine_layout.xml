@@ -14,7 +14,7 @@
         android:hint="请输入查询数量（数字）"
         android:inputType="number"
         android:maxLines="1"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginVertical="20dp"/>
 
     <!-- 开始按钮 -->
     <Button
@@ -23,6 +23,19 @@
         android:layout_height="wrap_content"
         android:text="开始查询"
         android:layout_marginBottom="20dp"/>
+
+    <SeekBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_height="5dp" />
+
+    <TextView
+        android:id="@+id/progress_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="进度0/0"/>
 
     <!-- 结果输出文本框（可滚动） -->
     <ScrollView
