@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="center_horizontal"
+  android:orientation="vertical"
+  android:padding="20dp">
+
+  <!-- 输入查询数量 -->
+  <EditText
+    android:id="@+id/et_query_count"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:gravity="center_horizontal">
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="20dp"
+    android:hint="请输入查询数量（数字）"
+    android:inputType="number"
+    android:maxLines="1" />
 
-    <!-- 输入查询数量 -->
-    <EditText
-        android:id="@+id/et_query_count"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入查询数量（数字）"
-        android:inputType="number"
-        android:maxLines="1"
-        android:layout_marginVertical="20dp"/>
+  <!-- 开始按钮 -->
+  <Button
+    android:id="@+id/btn_start_query"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:text="开始查询" />
 
-    <!-- 开始按钮 -->
-    <Button
-        android:id="@+id/btn_start_query"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="开始查询"
-        android:layout_marginBottom="20dp"/>
+  <SeekBar
+    android:id="@+id/progress"
+    android:layout_width="match_parent"
+    android:layout_height="5dp"
+    android:layout_marginBottom="5dp"
+    android:clickable="false"
+    android:focusable="false" />
 
-    <SeekBar
-        android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="5dp"
-        android:layout_height="5dp" />
+  <TextView
+    android:id="@+id/progress_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:text="进度0/0" />
+
+  <!-- 结果输出文本框（可滚动） -->
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
 
     <TextView
-        android:id="@+id/progress_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="进度0/0"/>
-
-    <!-- 结果输出文本框（可滚动） -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/tv_query_result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="查询结果将显示在这里..."
-            android:textSize="14sp"/>
-    </ScrollView>
+      android:id="@+id/tv_query_result"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="查询结果将显示在这里..."
+      android:textSize="14sp" />
+  </ScrollView>
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android_practice.coroutines.CoroutineActivity
 import com.example.android_practice.databinding.MainLayoutBinding
 import com.example.android_practice.http.HttpActivity
 import com.example.android_practice.listener.ListenerActivity
@@ -27,6 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     binding.dragView.setOnClickListener {
       startActivity(Intent(this, ListenerActivity::class.java))
+    }
+
+    binding.coroutineView.setOnClickListener {
+      startActivity(Intent(this, CoroutineActivity::class.java))
     }
   }
 

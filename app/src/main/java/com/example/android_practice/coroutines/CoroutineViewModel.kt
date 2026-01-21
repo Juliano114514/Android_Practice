@@ -12,21 +12,31 @@ import kotlinx.coroutines.launch
  * @Description:
  */
 class CoroutineViewModel : ViewModel() {
-  private val _queryResult = MutableLiveData<String>("")
+  private val _queryResult = MutableLiveData("")
   val queryResult: LiveData<String> = _queryResult
 
+  private val _isQuerying = MutableLiveData(false)
+  val isQuerying: LiveData<Boolean> = _isQuerying
+
+  private val _progress = MutableLiveData(ProgressData(0,0))
+  val progress: LiveData<ProgressData> = _progress
+
   fun doQuery(count : Int){
+    if (_isQuerying.value == true) return
     val userIdList = List(count) { ServiceApi.getRadomId() }
     viewModelScope.launch {
+      _isQuerying.postValue(true)
       _queryResult.postValue("正在查询...")
       try{
         val userInfoList = ServiceApi.getInfos(userIdList) { completed, total ->
-          _queryResult.postValue("查询中：$completed/$total")
+          _progress.postValue(ProgressData(total = total, completed = completed))
         }
         updateResult(userInfoList)
       } catch (e: Exception) {
         // 异常处理：捕获并展示错误信息
         _queryResult.postValue("查询失败：${e.message ?: "未知错误"}")
+      } finally {
+        _isQuerying.postValue(false)
       }
     }
   }
@@ -47,4 +57,13 @@ class CoroutineViewModel : ViewModel() {
     }
     _queryResult.postValue(result)
   }
+
+  fun clearResult() {
+    _queryResult.value = ""
+  }
 }
+
+data class ProgressData(
+  var total: Int = 0,
+  var completed: Int = 0,
+)

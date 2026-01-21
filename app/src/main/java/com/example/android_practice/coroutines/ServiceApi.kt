@@ -12,7 +12,7 @@ import kotlin.random.Random
 
 object ServiceApi {
 
-  private const val SEMAPHORE_SIZE = 20
+  private const val SEMAPHORE_SIZE = 100
 
   fun getRadomId(): String{
     return Random.nextInt().toString()

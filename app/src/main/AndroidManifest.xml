@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET" />
-    <application
-      android:allowBackup="true"
-      android:dataExtractionRules="@xml/data_extraction_rules"
-      android:fullBackupContent="@xml/backup_rules"
-      android:icon="@mipmap/ic_launcher"
-      android:label="@string/app_name"
-      android:roundIcon="@mipmap/ic_launcher_round"
-      android:supportsRtl="true"
-      android:theme="@style/Theme.Android_Practice"
-      tools:targetApi="31"
-      android:usesCleartextTraffic="true">
 
-      <activity
-        android:name="com.example.android_practice.MainActivity"
-        android:theme="@style/Theme.Android_Practice"
-        android:exported="true">
+  <uses-permission android:name="android.permission.INTERNET" />
+  <application
+    android:allowBackup="true"
+    android:dataExtractionRules="@xml/data_extraction_rules"
+    android:fullBackupContent="@xml/backup_rules"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.Android_Practice"
+    android:usesCleartextTraffic="true"
+    tools:targetApi="31">
 
-        <intent-filter>
-          <category android:name="android.intent.category.LAUNCHER" />
-          <action android:name="android.intent.action.MAIN" />
-        </intent-filter>
+    <activity
+      android:name="com.example.android_practice.MainActivity"
+      android:exported="true"
+      android:theme="@style/Theme.Android_Practice">
 
-      </activity>
+      <intent-filter>
+        <category android:name="android.intent.category.LAUNCHER" />
+        <action android:name="android.intent.action.MAIN" />
+      </intent-filter>
 
-      <activity
-        android:name="com.example.android_practice.http.HttpActivity"
-        android:theme="@style/Theme.Android_Practice">
-      </activity>
+    </activity>
 
+    <activity
+      android:name="com.example.android_practice.http.HttpActivity"
+      android:theme="@style/Theme.Android_Practice">
+    </activity>
 
-      <activity
-        android:name="com.example.android_practice.listener.ListenerActivity"
-        android:theme="@style/Theme.Android_Practice">
-      </activity>
+    <activity
+      android:name="com.example.android_practice.listener.ListenerActivity"
+      android:theme="@style/Theme.Android_Practice">
+    </activity>
 
+    <activity
+      android:name="com.example.android_practice.coroutines.CoroutineActivity"
+      android:theme="@style/Theme.Android_Practice">
+    </activity>
 
-    </application>
+  </application>
 
 </manifest>
